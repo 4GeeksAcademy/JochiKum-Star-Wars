@@ -10,6 +10,7 @@ import { Footer } from "./component/Footer.jsx";
 import { Home } from "./pages/Home.jsx";
 import { Demo } from "./pages/Demo.jsx";
 import { Single } from "./pages/Single.jsx";
+import { Contact } from "./pages/Contact.jsx";
 
 
 // Create your first component
@@ -23,10 +24,11 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                    <Navbar/>
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
+                        <Route element={<Contact />} path="/contact" />
                         <Route element={<Single />} path="/single/:theId" />
                         <Route element={<h1>Not found!</h1>} path="*" />
                     </Routes>
