@@ -11,6 +11,8 @@ import { Home } from "./pages/Home.jsx";
 import { Demo } from "./pages/Demo.jsx";
 import { Single } from "./pages/Single.jsx";
 import { Contact } from "./pages/Contact.jsx";
+import { EditContact } from "./component/EditContact.jsx";
+import { AddContact } from "./component/AddContact.jsx";
 
 
 // Create your first component
@@ -26,11 +28,13 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar/>
                     <Routes>
-                        <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Contact />} path="/contact" />
-                        <Route element={<Single />} path="/single/:theId" />
+                        <Route element={<Home/>} path="/" />
+                        <Route element={<Demo/>} path="/demo" />
+                        <Route element={<Contact/>} path="/contact" />
+                        <Route element={<Single/>} path="/single/:theId" />
                         <Route element={<h1>Not found!</h1>} path="*" />
+                        <Route element={<EditContact/>} path="/edit-contact"/>
+                        <Route element={<AddContact/>} path="/add-contact"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>

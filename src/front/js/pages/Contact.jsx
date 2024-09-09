@@ -1,11 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 
 export const Contact = () => {
     const { store, actions } = useContext(Context)
-    const handleEdit = () => {};
+    const navigate = useNavigate()
+    
+    const handleEdit = (contact) => {
+        actions.setCurrentContact(contact)
+        navigate('/edit-contact')
+      };
+      const handleDelete = (id) => {
+        actions.deleteContact(id)
+      };
+
 
     return (
         <div className="container">
@@ -24,13 +33,19 @@ export const Contact = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">{item.name}</h5>
                                     <p className="card-text">{item.address}</p>
+                                <i className="fas fa-map-marker-alt"></i>
                                     <p className="card-text">{item.phone}</p>
+                                <i className="fas fa-phone"></i>
                                     <p className="card-text">{item.email}</p>
+                                <i className="fas fa-envelope"></i>
                                 </div>
                             </div>
                             <div className="col-2">
-                                <span onClick={handleEdit}>
-                                    <i class="fas fa-pencil-alt "></i>
+                                <span onClick={() => handleEdit(item)}>
+                                    <i className="fas fa-pencil-alt text-success mx-1"></i>
+                                </span>
+                                <span onClick={() => handleDelete(item.id)}>
+                                    <i className="fas fa-trash-alt text-danger mx-1"></i>
                                 </span>
                             </div>
                         </div>

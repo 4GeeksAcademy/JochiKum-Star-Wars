@@ -9,7 +9,7 @@ export const Home = () => {
 
 	return (
 		<div className="container">
-			<h1>hola</h1>
+			<h1 className="text-danger"></h1>
 		</div>
 	);
 };

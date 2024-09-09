@@ -1,33 +1,39 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext.js";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Context } from '../store/appContext.js'
+import { Contact } from '../pages/Contact.jsx';
 
-
-export const AddContact = () => {
-  const [ name, setName ]  = useState('');
-  const [ phone, setPhone ]  = useState('');
-  const [ email, setEmail ]  = useState('');
-  const [ address, setAddress ]  = useState('');
-  const { actions } = useContext(Context)
+export const EditContact = () => {
+  const { store, actions } = useContext(Context);
+  const currentContact = store.currentContact;
+  const [name, setName] = useState(currentContact.name);
+  const [phone, setPhone] = useState(currentContact.phone);
+  const [email, setEmail] = useState(currentContact.email);
+  const [address, setAddress] = useState(currentContact.address);
   const navigate = useNavigate()
 
-  const handleName = (event) => setName(event.target.value);
-  const handlePhone = (event) => setPhone(event.target.value);
-  const handleEmail = (event) => setEmail(event.target.value);
-  const handleAddress = (event) => setAddress(event.target.value);
+  const handleName = (event) => setName(event.target.value)
+  const handlePhone = (event) => setPhone(event.target.value)
+  const handleEmail = (event) => setEmail(event.target.value)
+  const handleAddress = (event) => setAddress(event.target.value)
+
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const dataToSend = {
-      name, phone, email, address
+    event.preventDefault()
+    const formdata = {
+      name,
+      phone,
+      email,
+      address,
     }
-    actions.addContact(dataToSend)
+    actions.editContact(currentContact.id, formdata)
     navigate('/contact')
+    console.log(currentContact.id)
   }
 
   return (
     <div className="container">
-      <h1>Add Contact</h1>
+      <h1>Edit Contact</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="inputName" className="form-label">Name</label>
