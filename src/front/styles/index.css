@@ -1,4 +1,6 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
-
+body{
+    background: rgb(31, 30, 30);
+}

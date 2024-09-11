@@ -13,6 +13,12 @@ import { Single } from "./pages/Single.jsx";
 import { Contact } from "./pages/Contact.jsx";
 import { EditContact } from "./component/EditContact.jsx";
 import { AddContact } from "./component/AddContact.jsx";
+import { Characters } from "./component/Characters.jsx";
+import { DetailCharacters } from "./pages/DetailCharacters.jsx";
+import { Spinner } from "./component/Spinner.jsx";
+import { BtnFavorites } from "./pages/BtnFavorites.jsx";
+
+
 
 
 // Create your first component
@@ -30,11 +36,15 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home/>} path="/" />
                         <Route element={<Demo/>} path="/demo" />
-                        <Route element={<Contact/>} path="/contact" />
                         <Route element={<Single/>} path="/single/:theId" />
                         <Route element={<h1>Not found!</h1>} path="*" />
-                        <Route element={<EditContact/>} path="/edit-contact"/>
+                        <Route element={<Contact/>} path="/contact" />
                         <Route element={<AddContact/>} path="/add-contact"/>
+                        <Route element={<EditContact/>} path="/edit-contact"/>
+                        <Route element={<BtnFavorites/>} path="/btn-favorites"/>
+                        <Route element={<Characters/>} path="/characters"/>
+                        <Route element={<Spinner/>} path="/spinner"/>
+                        <Route element={<DetailCharacters/>} path="/characters/:uid"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>

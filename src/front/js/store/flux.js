@@ -17,11 +17,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			contacts: [],
 			host: 'https://playground.4geeks.com/contact',
 			user: 'JochiKum',
-		    currentContact: {}
+			currentContact: {},
+			characters: [],
+			currentCharacter: {}
+
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			setCurrentContact: (contact) => { setStore({ currentContact: contact}) },
+			setCurrentContact: (contact) => { setStore({ currentContact: contact }) },
+			setCurrentCharacter: (value) => { setStore({ currentCharacter: value }) },
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
@@ -98,6 +102,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				// const data = await response.json()
 				getActions().getContact()
+			},
+			getCharacters: async () => {
+				if (localStorage.getItem('characters')) {
+					setStore({characters: JSON.parse(localStorage.getItem('characters'))});
+					console.log('characters estaba en el local storage')
+					return
+				}
+				const response = await fetch('https://www.swapi.tech/api/people')
+				if (!response.ok) {
+					return
+				}
+				const data = await response.json();
+				setStore({ characters: data.results });
+				localStorage.setItem('characters', JSON.stringify (data.results))
+			},
+			getCharacterDetails: async (id) => {
+				const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
+				if (!response.ok) { return };
+				const data = await response.json();
+				setStore({ currentCharacter: data.result.properties })
 			},
 			changeColor: (index, color) => {
 				//get the store
