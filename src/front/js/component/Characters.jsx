@@ -4,10 +4,18 @@ import { Link } from "react-router-dom";
 
 
 export const Characters = () => {
-    const { store } = useContext(Context);
+    const { store, actions } = useContext(Context);
 
     const handleError = (event) => {
         event.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
+    }
+
+    const handleFavorite = (element) => {
+        const  newFavorite = {
+            name: element.name,
+            type: 'character'
+        }
+        actions.addFavorites(newFavorite);
     }
 
     return (
@@ -24,9 +32,11 @@ export const Characters = () => {
                             <div className="card-body">
                                 <h5 className="card-title">{item.name}</h5>
                                 <div className="d-flex justify-content-between">
-                                    <Link to={`/characters/${item.uid}`} className="btn btn-primary">Detalles</Link>
-                                    <i className="far fa-heart fa-3x text-danger"></i>
-                                    <i className="fas fa-heart fa-3x text-danger"></i>
+                                    <Link to={`/characters/${item.uid}`} className="btn btn-secondary p-2">Detalles</Link>
+                                    <span className="btn btn-outline-danger" onClick={() => handleFavorite(item)}>
+                                    <i class="far fa-heart fa-lg "></i>
+
+                                    </span>
                                 </div>
                             </div>
                         </div>

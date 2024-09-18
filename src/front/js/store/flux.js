@@ -19,13 +19,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: 'JochiKum',
 			currentContact: {},
 			characters: [],
-			currentCharacter: {}
+			currentCharacter: {},
+			favorites:[{name: 'tierra', type: 'planet'}, {name: 'Luke', type: 'characters'}]
 
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			setCurrentContact: (contact) => { setStore({ currentContact: contact }) },
 			setCurrentCharacter: (value) => { setStore({ currentCharacter: value }) },
+			addFavorites: (newFavorite) => {
+				// Verificar que no se agregue de nuevo el character //
+				setStore({ favorites: [...getStore().favorites, newFavorite]} )
+			},
+			removeFavorites: (noFavorite) => {
+				const resultado = getStore().favorites.filter((item) => item.name !== noFavorite);
+				setStore({ favorites: resultado})
+			},
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
@@ -122,6 +131,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (!response.ok) { return };
 				const data = await response.json();
 				setStore({ currentCharacter: data.result.properties })
+			},
+			getPlanets: async () => {
+				const uri = `${getStore().hostStar}/planets`
+				const options = {
+					method: 'GET',
+				};
+				const response = await fetch(uri, options);
+				const data = await response.json();
+				setStore({ planets: data.results });
+				if (!response.ok) {
+					return
+				}
+			},
+			getPlanetsDetails: async (uid) => {
+				const uri = `${getStore().hostStar}/planets/${uid}`
+				setStore({ isLoading: true })
+				const options = {
+					method: 'GET',
+				};
+				const response = await fetch(uri, options);
+				const data = await response.json();
+				setStore({ planetsDetails: data.result });
+				if (!response.ok) {
+					return
+				}
+				setStore({ isLoading: false })
 			},
 			changeColor: (index, color) => {
 				//get the store

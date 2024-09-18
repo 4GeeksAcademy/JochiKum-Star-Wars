@@ -16,7 +16,10 @@ import { AddContact } from "./component/AddContact.jsx";
 import { Characters } from "./component/Characters.jsx";
 import { DetailCharacters } from "./pages/DetailCharacters.jsx";
 import { Spinner } from "./component/Spinner.jsx";
-import { BtnFavorites } from "./pages/BtnFavorites.jsx";
+import { Inicio } from "./pages/Inicio.jsx";
+import { Planets } from "./pages/Planets.jsx";
+import { PlanetsDetails } from "./component/PlanetsDetails.jsx";
+
 
 
 
@@ -41,10 +44,12 @@ const Layout = () => {
                         <Route element={<Contact/>} path="/contact" />
                         <Route element={<AddContact/>} path="/add-contact"/>
                         <Route element={<EditContact/>} path="/edit-contact"/>
-                        <Route element={<BtnFavorites/>} path="/btn-favorites"/>
+                        <Route element={<Inicio/>} path="/Inicio/"/>
                         <Route element={<Characters/>} path="/characters"/>
                         <Route element={<Spinner/>} path="/spinner"/>
                         <Route element={<DetailCharacters/>} path="/characters/:uid"/>
+                        <Route element={<Planets/>} path="/planets"/>
+                        <Route element={<PlanetsDetails/>} path="/planets-details/:uid"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>
