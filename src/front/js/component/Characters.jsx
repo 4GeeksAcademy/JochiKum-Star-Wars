@@ -35,14 +35,12 @@ export const Characters = () => {
                                     <Link to={`/characters/${item.uid}`} className="btn btn-secondary p-2">Detalles</Link>
                                     <span className="btn btn-outline-danger" onClick={() => handleFavorite(item)}>
                                     <i class="far fa-heart fa-lg "></i>
-
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 )}
-
             </div>
         </div>
     )

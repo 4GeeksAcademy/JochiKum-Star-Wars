@@ -5,17 +5,18 @@ import { Context } from "../store/appContext";
 export const PlanetsDetails = () => {
     const { store, actions } = useContext(Context);
     const params = useParams();
-    
+
     useEffect(() => {
         actions.getPlanetsDetails(params.uid)
     }, [])
-    if (store.isLoading) {
-        return <div className=" text-light d-flex justify-content-center">
-            <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </div>
-        </div>
-    }
+
+    // if (store.isLoading) {
+    //     return <div className=" text-light d-flex justify-content-center">
+    //         <div className="spinner-border" role="status">
+    //             <span className="visually-hidden">Loading...</span>
+    //         </div>
+    //     </div>
+
     return (
         <div className="container bg-dark">
             <div className="card my-2  bg-dark text-light">

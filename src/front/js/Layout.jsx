@@ -49,7 +49,7 @@ const Layout = () => {
                         <Route element={<Spinner/>} path="/spinner"/>
                         <Route element={<DetailCharacters/>} path="/characters/:uid"/>
                         <Route element={<Planets/>} path="/planets"/>
-                        <Route element={<PlanetsDetails/>} path="/planets-details/:uid"/>
+                        <Route element={<PlanetsDetails/>} path="/planets/:uid"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>

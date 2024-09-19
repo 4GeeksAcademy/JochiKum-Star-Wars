@@ -15,12 +15,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			contacts: [],
-			host: 'https://playground.4geeks.com/contact',
-			user: 'JochiKum',
+			// host: 'https://playground.4geeks.com/contact',
+			// user: 'JochiKum',
 			currentContact: {},
 			characters: [],
 			currentCharacter: {},
-			favorites:[{name: 'tierra', type: 'planet'}, {name: 'Luke', type: 'characters'}]
+			planets: [],
+
+			favorites: [{ name: 'tierra', type: 'planet' }, { name: 'Luke', type: 'characters' }]
 
 		},
 		actions: {
@@ -29,11 +31,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setCurrentCharacter: (value) => { setStore({ currentCharacter: value }) },
 			addFavorites: (newFavorite) => {
 				// Verificar que no se agregue de nuevo el character //
-				setStore({ favorites: [...getStore().favorites, newFavorite]} )
+				setStore({ favorites: [...getStore().favorites, newFavorite] })
 			},
 			removeFavorites: (noFavorite) => {
 				const resultado = getStore().favorites.filter((item) => item.name !== noFavorite);
-				setStore({ favorites: resultado})
+				setStore({ favorites: resultado })
 			},
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -114,7 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getCharacters: async () => {
 				if (localStorage.getItem('characters')) {
-					setStore({characters: JSON.parse(localStorage.getItem('characters'))});
+					setStore({ characters: JSON.parse(localStorage.getItem('characters')) });
 					console.log('characters estaba en el local storage')
 					return
 				}
@@ -124,7 +126,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const data = await response.json();
 				setStore({ characters: data.results });
-				localStorage.setItem('characters', JSON.stringify (data.results))
+				localStorage.setItem('characters', JSON.stringify(data.results))
 			},
 			getCharacterDetails: async (id) => {
 				const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
@@ -133,30 +135,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ currentCharacter: data.result.properties })
 			},
 			getPlanets: async () => {
-				const uri = `${getStore().hostStar}/planets`
-				const options = {
-					method: 'GET',
-				};
-				const response = await fetch(uri, options);
-				const data = await response.json();
-				setStore({ planets: data.results });
-				if (!response.ok) {
-					return
+				const response = await fetch('https://www.swapi.tech/api/planets');
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ planets: data.results });
+					console.log('Planets fetched successfully');
+				} else {
+					console.log('Failed to fetch planets');
 				}
 			},
+
+			
 			getPlanetsDetails: async (uid) => {
-				const uri = `${getStore().hostStar}/planets/${uid}`
-				setStore({ isLoading: true })
-				const options = {
-					method: 'GET',
-				};
-				const response = await fetch(uri, options);
-				const data = await response.json();
-				setStore({ planetsDetails: data.result });
-				if (!response.ok) {
-					return
+				setStore({ isLoading: true });
+
+				const response = await fetch(`https://www.swapi.tech/api/planets/${uid}`);
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ planetsDetails: data.result });
+					console.log(`Planet details fetched for UID: ${uid}`);
+				} else {
+					console.log(`Failed to fetch planet details for UID: ${uid}`);
 				}
-				setStore({ isLoading: false })
+
+				setStore({ isLoading: false });
 			},
 			changeColor: (index, color) => {
 				//get the store

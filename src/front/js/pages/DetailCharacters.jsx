@@ -40,5 +40,4 @@ export const DetailCharacters = () => {
                 }
             </div>
     )
-
 }
