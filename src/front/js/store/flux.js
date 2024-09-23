@@ -21,8 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters: [],
 			currentCharacter: {},
 			planets: [],
-
-			favorites: [{ name: 'tierra', type: 'planet' }, { name: 'Luke', type: 'characters' }]
+			starships : [],
+			favorites: [],
 
 		},
 		actions: {
@@ -30,8 +30,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setCurrentContact: (contact) => { setStore({ currentContact: contact }) },
 			setCurrentCharacter: (value) => { setStore({ currentCharacter: value }) },
 			addFavorites: (newFavorite) => {
-				// Verificar que no se agregue de nuevo el character //
-				setStore({ favorites: [...getStore().favorites, newFavorite] })
+				const store = getStore();
+				const favorites = store.favorites;
+
+				console.log("Adding to favorites:", newFavorite);
+
+				const isFavoriteExists = favorites.some(favorite =>
+					favorite.name === newFavorite.name && favorite.type === newFavorite.type
+				);
+
+				if (!isFavoriteExists) {
+					console.log("Favorite not found, adding:", newFavorite);
+					// Verificar que no se agregue de nuevo el character //
+					// setStore({ favorites: [...getStore().favorites, newFavorite] })
+					setStore({ favorites: [...favorites, newFavorite] })
+				} else {
+					console.log("Favorite already exists, not adding:", newFavorite);
+				}
 			},
 			removeFavorites: (noFavorite) => {
 				const resultado = getStore().favorites.filter((item) => item.name !== noFavorite);
@@ -144,8 +159,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('Failed to fetch planets');
 				}
 			},
-
-			
 			getPlanetsDetails: async (uid) => {
 				setStore({ isLoading: true });
 
@@ -158,6 +171,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(`Failed to fetch planet details for UID: ${uid}`);
 				}
 
+				setStore({ isLoading: false });
+			},
+			getStarships: async () => {
+				const response = await fetch('https://www.swapi.tech/api/Starships');
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ starships : data.results });
+					console.log('Starships fetched successfully');
+				} else {
+					console.log('Failed to fetch Starships');
+				}
+			},
+			getStarshipsDetails: async (uid) => {
+				setStore({ isLoading: true });
+				const response = await fetch(`https://www.swapi.tech/api/Starships/${uid}`);
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ starshipsDetails: data.result });
+					console.log(`Starships details fetched for UID: ${uid}`);
+				} else {
+					console.log(`Failed to fetch Starships details for UID: ${uid}`);
+				}
 				setStore({ isLoading: false });
 			},
 			changeColor: (index, color) => {

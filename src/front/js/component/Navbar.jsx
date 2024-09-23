@@ -18,12 +18,17 @@ export const Navbar = () => {
 							</Link>
 						</li>
 						<li>
-							<BtnFavorites />
+							<Link to='/planets'>
+								<button className="btn btn-warning me-2">Planets</button>
+							</Link>
 						</li>
 						<li>
-							<Link to='/planets'>
-							<button className="btn btn-warning me-2">Planets</button>
+							<Link to='/starships'>
+								<button className="btn btn-warning me-2">Starships</button>
 							</Link>
+						</li>
+						<li>
+							<BtnFavorites />
 						</li>
 					</ul>
 				</div>

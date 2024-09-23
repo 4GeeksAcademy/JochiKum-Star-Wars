@@ -20,7 +20,7 @@ export const BtnFavorites = () => {
             </button>
             <ul className="dropdown-menu dropdown-menu-end">
                 {store.favorites.map((item, index) =>
-                    <li key={index} className="dropdown-item justify-content-between">{item.name} - {item.type}
+                    <li key={index} className="dropdown-item justify-content-between d-flex">{item.name} - {item.type}
                         <span onClick={() => handleTrash(item)} className="ms-5">
                             <i className="fas fa-trash"></i>
                         </span>

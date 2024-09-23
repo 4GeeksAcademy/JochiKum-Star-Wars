@@ -26,13 +26,13 @@ export const DetailCharacters = () => {
                                 <div className="col-md-8 text-white">
                                     <div className="card-body">
                                         <h1 className="text-center color-white">{store.currentCharacter.name}</h1>
-                                        <p>Height: {store.currentCharacter.height}</p>
-                                        <p>Mass: {store.currentCharacter.mass}</p>
-                                        <p>Hair color: {store.currentCharacter.hair_color}</p>
-                                        <p>Skin color: {store.currentCharacter.skin_color}</p>
-                                        <p>Eye color: {store.currentCharacter.eye_color}</p>
-                                        <p>Birth year: {store.currentCharacter.birth_year}</p>
-                                        <p>Gender: {store.currentCharacter.gender}</p>
+                                        <p><strong>Height: </strong> {store.currentCharacter.height}</p>
+                                        <p><strong>Mass: </strong>{store.currentCharacter.mass}</p>
+                                        <p><strong>Hair color: </strong> {store.currentCharacter.hair_color}</p>
+                                        <p><strong>Skin color: </strong>{store.currentCharacter.skin_color}</p>
+                                        <p><strong>Eye color: </strong> {store.currentCharacter.eye_color}</p>
+                                        <p><strong>Birth year: </strong> {store.currentCharacter.birth_year}</p>
+                                        <p><strong>Gender: </strong> {store.currentCharacter.gender}</p>
                                     </div>
                                 </div>
                             </div>
