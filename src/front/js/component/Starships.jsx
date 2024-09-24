@@ -26,12 +26,10 @@ export const Starships = () => {
                         <div className="card border-dark my-3 mx-2 text-bg-dark">
                             <img src={`https://starwars-visualguide.com/assets/img/starships/${item.uid}.jpg`} className="card-img-top" alt="..."
                                 onError={handleError} />
-                            {/*<img src={`https://starwars-visualguide.com/assets/img/planets/${item.uid}.jpg`} className="card-img-top" alt="..." 
-                            onError={handleError}/> */}
                             <div className="card-body">
                                 <h5 className="card-title">{item.name}</h5>
                                 <div className="d-flex justify-content-between">
-                                    <Link to={`/starship/${item.uid}`} className="btn btn-secondary p-2">Detalles</Link>
+                                    <Link to={`/starships/${item.uid}`} className="btn btn-secondary p-2">Detalles</Link>
                                     <span className="btn btn-outline-danger" onClick={() => handleFavorite(item)}>
                                         <i className="far fa-heart fa-lg "></i>
                                     </span>

@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters: [],
 			currentCharacter: {},
 			planets: [],
-			starships : [],
+			starships: [],
 			favorites: [],
 
 		},
@@ -177,7 +177,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch('https://www.swapi.tech/api/Starships');
 				if (response.ok) {
 					const data = await response.json();
-					setStore({ starships : data.results });
+					setStore({ starships: data.results });
 					console.log('Starships fetched successfully');
 				} else {
 					console.log('Failed to fetch Starships');
@@ -188,7 +188,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(`https://www.swapi.tech/api/Starships/${uid}`);
 				if (response.ok) {
 					const data = await response.json();
-					setStore({ starshipsDetails: data.result });
+					setStore({ starshipsDetails: data.result.properties });
 					console.log(`Starships details fetched for UID: ${uid}`);
 				} else {
 					console.log(`Failed to fetch Starships details for UID: ${uid}`);

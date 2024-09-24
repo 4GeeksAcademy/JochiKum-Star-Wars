@@ -7,6 +7,10 @@ export const StarshipDetails = () => {
     const { store, actions } = useContext(Context);
     const params = useParams();
 
+    const handleError = (event) => {
+        event.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
+    }
+
     useEffect(() => {
         actions.getStarshipsDetails(params.uid)
     }, [])
