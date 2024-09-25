@@ -29,8 +29,8 @@ class Users(db.Model):
 class Authors(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # Atributos
-    name = db.Column(db.String(), unique=False, nullable=False)
-    country = db.Column(db.String(), unique=False, nullable=True)
+    name = db.Column(db.String(25), unique=False, nullable=False)
+    country = db.Column(db.String(25), unique=False, nullable=True)
     # Relaciones
 
     def __repr__(self):
@@ -52,3 +52,15 @@ class Books(db.Model):
     def serialize(self):
         return {'id': self.id,
                 'book': self.name}
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    comment_text = db.Column(db.String(1), unique = False, nullable= False)
+
+    def __repr__(self):
+        return f'<Comment: {self.id} - {self.comment_text}>'
+
+    def serialize(self):
+        return {'id' : self.id,
+                'comment': self.comment_text}
