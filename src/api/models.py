@@ -16,7 +16,7 @@ class Users(db.Model):
     identification_number = db.Column(db.Integer)
 
     def __repr__(self):
-        return f'<User {self.email}>'
+        return f'<User {self.email} - {self.name}>'
 
     def serialize(self):
         # Do not serialize the password, its a security breach
@@ -26,12 +26,22 @@ class Users(db.Model):
                 'is_admin': self.is_admin}
 
 
+class Followers(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    follower_to = db.relationship('Users', foreign_keys=[follower_id], backref=db.backref('follower_to', lazy='select'))
+    following_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    following_to = db.relationship('Users', foreign_keys=[following_id], backref=db.backref('following_to', lazy='select'))
+    
+
 class Authors(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # Atributos
-    name = db.Column(db.String(25), unique=False, nullable=False)
-    country = db.Column(db.String(25), unique=False, nullable=True)
+    name = db.Column(db.String(), unique=False, nullable=False)
+    country = db.Column(db.String(), unique=False, nullable=True)
     # Relaciones
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('author_to', lazy='select'))
 
     def __repr__(self):
         return f'<Authors: {self.id} - {self.name}>'
@@ -39,12 +49,15 @@ class Authors(db.Model):
     def serialize(self):
         return {'id': self.id,
                 'authors': self.name,
-                'country': self.country}
+                'country': self.country,
+                'books': [row.serialize() for row in self.book_to]}
 
 
 class Books(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(), unique=False, nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
+    author_to = db.relationship('Authors', foreign_keys=[author_id], backref=db.backref('book_to'), lazy='select')
 
     def __repr__(self):
         return f'<Books> {self.id} / {self.name}'
@@ -52,15 +65,3 @@ class Books(db.Model):
     def serialize(self):
         return {'id': self.id,
                 'book': self.name}
-
-
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    comment_text = db.Column(db.String(1), unique = False, nullable= False)
-
-    def __repr__(self):
-        return f'<Comment: {self.id} - {self.comment_text}>'
-
-    def serialize(self):
-        return {'id' : self.id,
-                'comment': self.comment_text}
