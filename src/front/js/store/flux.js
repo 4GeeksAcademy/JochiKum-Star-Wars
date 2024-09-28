@@ -52,6 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const resultado = getStore().favorites.filter((item) => item.name !== noFavorite);
 				setStore({ favorites: resultado })
 			},
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
