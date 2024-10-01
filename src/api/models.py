@@ -12,7 +12,7 @@ class Users(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     is_admin = db.Column(db.Boolean(), unique=False, nullable=False)
     username = db.Column(db.String(), unique =False, nullable=True)
-    fist_name = db.Column(db.String(), unique=False, nullable=True)
+    first_name = db.Column(db.String(), unique=False, nullable=True)
     last_name = db.Column(db.String(), unique=False, nullable=True)
     address =  db.Column(db.String(), unique=False, nullable=True)
     identification_type = db.Column(db.Enum('DNI', 'NIE', 'GC', name='identification_type'))
@@ -70,8 +70,9 @@ class Books(db.Model):
         return {'id': self.id,
                 'book': self.name}
 
-class Post(db.Model):
-    __tablename__ = 'post'
+
+class Posts(db.Model):
+    __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(250), nullable=False)
     description = db.Column(db.String(250), nullable=False)
@@ -88,11 +89,12 @@ class Post(db.Model):
         return {'id': self.id,
                 'post': self.text_post}
 
+
 class Comments(db.Model):
-    __tablename__ = 'comment'
+    __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(250), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('comment_to', lazy='select'))
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-    post_to = db.relationship('post', foreign_keys=[post_id], backref=db.backref('comments_to', lazy='select'))
+    user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('comments_to', lazy='select'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    post_to = db.relationship('Posts', foreign_keys=[post_id], backref=db.backref('comments_to', lazy='select'))
