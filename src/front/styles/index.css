@@ -1,3 +1,148 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+:root {
+    --fondo-principal: #0c3a72;
+    --fondo-secundario: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: var(--fondo-principal);
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.login-form {
+    width: 750px;
+    height: auto;
+    display: flex;
+    border-radius: 30px;
+    background-color: var(--fondo-secundario);
+}
+
+.login-form img {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.login-form main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form main h3 {
+    color: gray;
+    text-align: center;
+}
+
+.login-form main .box-input {
+    width: 80%;
+    border: 1px solid #cccccc;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.login-form main .box-input i {
+    color: rgb(23, 117, 218);
+}
+
+.login-form main .box-input input {
+    width: 100%;
+    border: 0;
+    padding: 5px 10px;
+}
+
+.login-form main .box-input input:focus {
+    outline: none;
+}
+
+.login-form main .remember {
+    width: 85%;
+    text-align: left;
+    margin: 5px 0;
+}
+
+.login-form main .login-button {
+    width: 85%;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 20px;
+    border: 0;
+    color: #ffffff;
+    background-color: #317de0;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+
+.login-form main a {
+    text-decoration: none;
+    color: #3982e3;
+    font-weight: bold;
+}
+
+.login-form main .forgot {
+    text-align: right;
+    display: flex;
+    align-self: flex-end;
+    margin: 5px 30px;
+}
+
+.login-form main .social-text {
+    font-size: 14px;
+    color: #666666;
+}
+
+.login-form main .social-login {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.login-form main .social-login .btn-facebook,
+.login-form main .social-login .btn-google,
+.login-form main .social-login .btn-twitter {
+    width: 100px;
+    background-color: gray;
+    padding: 8px 0;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.login-form main .social-login .btn-facebook {
+    background-color: #0061E4;
+}
+
+.login-form main .social-login .btn-google {
+    background-color: rgb(200, 56, 56);
+}
+
+.login-form main .social-login .btn-twitter {
+    background-color: rgb(19, 184, 243);
+}
+
+.login-form main hr {
+    width: 80%;
+    border: 1px solid #cccccc;
+    margin: 20px 0;
+}
+
+.login-form main .register-text {
+    font-size: 14px;
+    color: #666666;
+    ;
+}
